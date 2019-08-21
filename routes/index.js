@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const notes = require("./controllers/note.controller.js");
+const notes = require("./Controllers/note.controller.js");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
