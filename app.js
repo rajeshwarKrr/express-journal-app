@@ -7,10 +7,12 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
+const userRouter = require("./routes/Controllers/user.controller");
 const cors = require("cors");
 const app = express();
 
 const dbconfig = require("./routes/config/database.config.js");
+
 app.use(cors());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,7 +28,7 @@ app.use(bodyParser.json());
 mongoose
   .connect(
     dbconfig.url,
-    { useNewUrlParser: true }
+    { useNewUrlParser: true, useCreateIndex: true }
   )
   .then(() => {
     console.log("Succesfully connected to db");
@@ -45,6 +47,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/users", userRouter);
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler

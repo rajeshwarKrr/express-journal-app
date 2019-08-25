@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const notes = require("./Controllers/note.controller.js");
+const userRouter = require("./Controllers/user.controller");
+const notes = require("./Controllers/note.controller");
 
+//use(userRouter);
+// router.use("/users", userRouter);
 /* GET home page. */
 router.get("/", function(req, res, next) {
   res.render("index", {
